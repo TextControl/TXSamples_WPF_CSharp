@@ -1,0 +1,325 @@
+﻿<Window 
+        x:Class="TXTextControl.Words.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:WPF="clr-namespace:TXTextControl.WPF;assembly=TXTextControl.WPF"
+        xmlns:prop="clr-namespace:TXTextControl.Words.Properties"
+        mc:Ignorable="d"
+        FontFamily="Segoe UI" FontSize="9pt"
+        WindowStartupLocation="CenterScreen" Height="850" Width="1250" UseLayoutRounding="True"
+        Title="{x:Static prop:Resources.MainWindow_Caption_Product}"
+        Loaded="MainWindow_Loaded" Closing="MainWindow_Closing">
+    <DockPanel>
+        <Menu IsMainMenu="True" Name="m_muMenu" DockPanel.Dock="Top">
+            <!-- 'File' Items -->
+            <MenuItem Name="m_miFile" Header="{x:Static prop:Resources.Item_File_Text}" SubmenuOpened="File_SubmenuOpened">
+                <MenuItem Name="m_miFile_New" Header="{x:Static prop:Resources.Item_File_New_Text}" Click="File_New_Click"/>
+                <MenuItem Name="m_miFile_Open" Header="{x:Static prop:Resources.Item_File_Open_Text}" Click="File_Open_Click"/>
+                <MenuItem Name="m_miFile_RecentFiles" Header="{x:Static prop:Resources.Item_File_RecentFiles_Text}" Click="File_RecentFiles_Item_Click"/>
+                <Separator Name="m_sepFile_Separator01"/>
+                <MenuItem Name="m_miFile_Save" Header="{x:Static prop:Resources.Item_File_Save_Text}" Click="File_Save_Click"/>
+                <MenuItem Name="m_miFile_SaveAs" Header="{x:Static prop:Resources.Item_File_SaveAs_Text}" Click="File_SaveAs_Click"/>
+                <Separator Name="m_sepFile_Separator02"/>
+                <MenuItem Name="m_miFile_PageSetup" Header="{x:Static prop:Resources.Item_File_PageSetup_Text}" Click="File_PageSetup_Click"/>
+                <MenuItem Name="m_miFile_Print" Header="{x:Static prop:Resources.Item_File_Print_Text}" Click="File_Print_Click"/>
+                <MenuItem Name="m_miFile_PrintQuick" Header="{x:Static prop:Resources.Item_File_PrintQuick_Text}" Click="File_PrintQuick_Click"/>
+                <Separator Name="m_sepFile_Separator03"/>
+                <MenuItem Name="m_miFile_SignIn" Header="{x:Static prop:Resources.Item_File_SignIn_Text}" Click="File_SignIn_Click"/>
+                <MenuItem Name="m_miFile_CurrentUser" Header="[Current User]" Visibility="Collapsed">
+                    <MenuItem Name="m_miFile_CurrentUser_AccountSettings" Header="{x:Static prop:Resources.Item_File_CurrentUser_AccountSettings_Text}" Click="File_CurrentUser_AccountSettings_Click"/>
+                    <MenuItem Name="m_miFile_CurrentUser_SignOut" Header="{x:Static prop:Resources.Item_File_CurrentUser_SignOut_Text}" Click="File_CurrentUser_SignOut_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miFile_Exit" Header="{x:Static prop:Resources.Item_File_Exit_Text}" Click="File_Exit_Click"/>
+            </MenuItem>
+            <!-- 'Edit' Items -->
+            <MenuItem Name="m_miEdit" Header="{x:Static prop:Resources.Item_Edit_Text}" SubmenuOpened="Edit_SubmenuOpened">
+                <MenuItem Name="m_miEdit_Undo" Header="{x:Static prop:Resources.Item_Edit_Undo_Text}" Click="Edit_Undo_Click"/>
+                <MenuItem Name="m_miEdit_Redo" Header="{x:Static prop:Resources.Item_Edit_Redo_Text}" Click="Edit_Redo_Click"/>
+                <Separator Name="m_sepEdit_Separator01"/>
+                <MenuItem Name="m_miEdit_Cut" Header="{x:Static prop:Resources.Item_Edit_Cut_Text}" Click="Edit_Cut_Click"/>
+                <MenuItem Name="m_miEdit_Copy" Header="{x:Static prop:Resources.Item_Edit_Copy_Text}" Click="Edit_Copy_Click"/>
+                <MenuItem Name="m_miEdit_Paste" Header="{x:Static prop:Resources.Item_Edit_Paste_Text}" Click="Edit_Paste_Click"/>
+                <Separator Name="m_sepEdit_Separator02"/>
+                <MenuItem Name="m_miEdit_SelectAll" Header="{x:Static prop:Resources.Item_Edit_SelectAll_Text}" Click="Edit_SelectAll_Click"/>
+                <Separator Name="m_sepEdit_Separator03"/>
+                <MenuItem Name="m_miEdit_Find" Header="{x:Static prop:Resources.Item_Edit_Find_Text}" Click="Edit_Find_Click"/>
+                <MenuItem Name="m_miEdit_Replace" Header="{x:Static prop:Resources.Item_Edit_Replace_Text}" Click="Edit_Replace_Click"/>
+                <Separator Name="m_sepEdit_Separator04"/>
+                <MenuItem Name="m_miEdit_Permissions" Header="{x:Static prop:Resources.Item_Edit_Permissions_Text}" SubmenuOpened="Edit_Permissions_SubmenuOpened">
+                    <MenuItem Name="m_miEdit_Permissions_AllowFormatting" Header="{x:Static prop:Resources.Item_Edit_Permissions_AllowFormatting_Text}" IsCheckable="True" Click="Edit_Permissions_AllowFormatting_Click"/>
+                    <MenuItem Name="m_miEdit_Permissions_AllowFormattingStyles" Header="{x:Static prop:Resources.Item_Edit_Permissions_AllowFormattingStyles_Text}" IsCheckable="True" Click="Edit_Permissions_AllowFormattingStyles_Click"/>
+                    <MenuItem Name="m_miEdit_Permissions_AllowPrinting" Header="{x:Static prop:Resources.Item_Edit_Permissions_AllowPrinting_Text}" IsCheckable="True" Click="Edit_Permissions_AllowPrinting_Click"/>
+                    <MenuItem Name="m_miEdit_Permissions_AllowCopy" Header="{x:Static prop:Resources.Item_Edit_Permissions_AllowCopy_Text}" IsCheckable="True" Click="Edit_Permissions_AllowCopy_Click"/>
+                    <MenuItem Name="m_miEdit_Permissions_AllowEditingFormFields" Header="{x:Static prop:Resources.Item_Edit_Permissions_AllowEditingFormFields_Text}" IsCheckable="True" Click="Edit_Permissions_AllowEditingFormFields_Click"/>
+                    <MenuItem Name="m_miEdit_Permissions_ReadOnly" Header="{x:Static prop:Resources.Item_Edit_Permissions_ReadOnly_Text}" IsCheckable="True" Click="Edit_Permissions_ReadOnly_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miEdit_EditableRegions" Header="{x:Static prop:Resources.Item_Edit_EditableRegions_Text}">
+                    <MenuItem Name="m_miEdit_EditableRegions_Add" Header="{x:Static prop:Resources.Item_Edit_EditableRegions_Add_Text}" SubmenuOpened="Edit_EditableRegions_Add_SubmenuOpened">
+                        <MenuItem Name="m_miEdit_EditableRegions_Add_ForCurrentUser" Header="_For [Current User]" Click="Edit_EditableRegions_Add_ForCurrentUser_Click"/>
+                        <MenuItem Name="m_miEdit_EditableRegions_Add_ForEveryone" Header="{x:Static prop:Resources.Item_Edit_EditableRegions_Add_ForEveryone_Text}" Click="Edit_EditableRegions_Add_ForEveryone_Click"/>
+                    </MenuItem>
+                    <MenuItem Name="m_miEdit_EditableRegions_Remove" Header="{x:Static prop:Resources.Item_Edit_EditableRegions_Remove_Text}" SubmenuOpened="Edit_EditableRegions_Remove_SubmenuOpened">
+                        <MenuItem Name="m_miEdit_EditableRegions_Remove_ForCurrentUser" Header="_For [Current User]" Click="Edit_EditableRegions_Remove_ForCurrentUser_Click"/>
+                        <MenuItem Name="m_miEdit_EditableRegions_Remove_ForEveryone" Header="{x:Static prop:Resources.Item_Edit_EditableRegions_Remove_ForEveryone_Text}" Click="Edit_EditableRegions_Remove_ForEveryone_Click"/>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Name="m_miEdit_ProtectDocument" Header="{x:Static prop:Resources.Item_Edit_ProtectDocument_Text}" IsCheckable="True" Click="Edit_ProtectDocument_Click"/>
+                <Separator Name="m_sepEdit_Separator05"/>
+                <MenuItem Name="m_miEdit_TrackedChanges" Header="{x:Static prop:Resources.Item_Edit_TrackedChanges_Text}">
+                    <MenuItem Name="m_miEdit_TrackedChanges_TrackChanges" Header="{x:Static prop:Resources.Item_Edit_TrackedChanges_TrackChanges_Text}" IsCheckable="True" Click="Edit_TrackedChanges_TrackChanges_Click"/>
+                    <MenuItem Name="m_miEdit_TrackedChanges_ReviewTrackedChanges" Header="{x:Static prop:Resources.Item_Edit_TrackedChanges_ReviewTrackedChanges_Text}" Click="Edit_TrackedChanges_ReviewTrackedChanges_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miEdit_Comments" Header="{x:Static prop:Resources.Item_Edit_Comments_Text}">
+                    <MenuItem Name="m_miEdit_Comments_AddComment" Header="{x:Static prop:Resources.Item_Edit_Comments_AddComment_Text}" Click="Edit_Comments_AddComment_Click"/>
+                    <MenuItem Name="m_miEdit_Comments_ReviewComments" Header="{x:Static prop:Resources.Item_Edit_Comments_ReviewComments_Text}" Click="Edit_Comments_ReviewComments_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <!-- 'View' Items -->
+            <MenuItem Name="m_miView" Header="{x:Static prop:Resources.Item_View_Text}" SubmenuOpened="View_SubmenuOpened">
+                <MenuItem Name="m_miView_PageLayout" Header="{x:Static prop:Resources.Item_View_PageLayout_Text}" IsCheckable="True" Click="View_PageLayout_Click"/>
+                <MenuItem Name="m_miView_Draft" Header="{x:Static prop:Resources.Item_View_Draft_Text}" IsCheckable="True" Click="View_Draft_Click"/>
+                <Separator Name="m_sepView_Separator01"/>
+                <MenuItem Name="m_miView_ButtonBar" Header="{x:Static prop:Resources.Item_View_ButtonBar_Text}" IsCheckable="True" Click="View_ButtonBar_Click"/>
+                <MenuItem Name="m_miView_StatusBar" Header="{x:Static prop:Resources.Item_View_StatusBar_Text}" IsCheckable="True" Click="View_StatusBar_Click"/>
+                <MenuItem Name="m_miView_HorizontalRuler" Header="{x:Static prop:Resources.Item_View_HorizontalRuler_Text}" IsCheckable="True" Click="View_HorizontalRuler_Click"/>
+                <MenuItem Name="m_miView_VerticalRuler" Header="{x:Static prop:Resources.Item_View_VerticalRuler_Text}" IsCheckable="True" Click="View_VerticalRuler_Click"/>
+                <Separator Name="m_sepView_Separator02"/>
+                <MenuItem Name="m_miView_TableGridlines" Header="{x:Static prop:Resources.Item_View_TableGridlines_Text}" IsCheckable="True" Click="View_TableGridlines_Click"/>
+                <MenuItem Name="m_miView_BookmarkMarkers" Header="{x:Static prop:Resources.Item_View_BookmarkMarkers_Text}" IsCheckable="True" Click="View_BookmarkMarkers_Click"/>
+                <MenuItem Name="m_miView_TextFrameMarkerLines" Header="{x:Static prop:Resources.Item_View_TextFrameMarkerLines_Text}" IsCheckable="True" Click="View_TextFrameMarkerLines_Click"/>
+                <MenuItem Name="m_miView_DrawingMarkerLines" Header="{x:Static prop:Resources.Item_View_DrawingMarkerLines_Text}" IsCheckable="True" Click="View_DrawingMarkerLines_Click"/>
+                <MenuItem Name="m_miView_ControlChars" Header="{x:Static prop:Resources.Item_View_ControlChars_Text}" IsCheckable="True" Click="View_ControlChars_Click"/>
+                <Separator Name="m_sepView_Separator03"/>
+                <MenuItem Name="m_miView_EditableRegions" Header="{x:Static prop:Resources.Item_View_EditableRegions_Text}" SubmenuOpened="View_EditableRegions_SubmenuOpened">
+                    <MenuItem Name="m_miView_EditableRegions_Always" Header="{x:Static prop:Resources.Item_View_EditableRegions_Always_Text}" IsCheckable="True" Click="View_EditableRegions_Always_Click"/>
+                    <MenuItem Name="m_miView_EditableRegions_Current" Header="{x:Static prop:Resources.Item_View_EditableRegions_Current_Text}" IsCheckable="True" Click="View_EditableRegions_Current_Click"/>
+                    <MenuItem Name="m_miView_EditableRegions_Never" Header="{x:Static prop:Resources.Item_View_EditableRegions_Never_Text}" IsCheckable="True" Click="View_EditableRegions_Never_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miView_TrackedChanges" Header="{x:Static prop:Resources.Item_View_TrackedChanges_Text}" IsCheckable="True" Click="View_TrackedChanges_Click"/>
+                <MenuItem Name="m_miView_Comments" Header="{x:Static prop:Resources.Item_View_Comments_Text}" SubmenuOpened="View_Comments_SubmenuOpened">
+                    <MenuItem Name="m_miView_Comments_Always" Header="{x:Static prop:Resources.Item_View_Comments_Always_Text}" IsCheckable="True" Click="View_Comments_Always_Click"/>
+                    <MenuItem Name="m_miView_Comments_Current" Header="{x:Static prop:Resources.Item_View_Comments_Current_Text}" IsCheckable="True" Click="View_Comments_Current_Click"/>
+                    <MenuItem Name="m_miView_Comments_Never" Header="{x:Static prop:Resources.Item_View_Comments_Never_Text}" IsCheckable="True" Click="View_Comments_Never_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepView_Separator04"/>
+                <MenuItem Name="m_miView_Zoom" Header="{x:Static prop:Resources.Item_View_Zoom_Text}" SubmenuOpened="View_Zoom_SubmenuOpened">
+                    <MenuItem Name="m_miView_Zoom_50" Header="_50%" IsCheckable="True" Tag="50" Click="View_Zoom_MenuItem_Click"/>
+                    <MenuItem Name="m_miView_Zoom_75" Header="_75%" IsCheckable="True" Tag="75" Click="View_Zoom_MenuItem_Click"/>
+                    <MenuItem Name="m_miView_Zoom_100" Header="_100%" IsCheckable="True" Tag="100" Click="View_Zoom_MenuItem_Click"/>
+                    <MenuItem Name="m_miView_Zoom_150" Header="15_0%" IsCheckable="True" Tag="150" Click="View_Zoom_MenuItem_Click"/>
+                    <MenuItem Name="m_miView_Zoom_200" Header="_200%" IsCheckable="True" Tag="200" Click="View_Zoom_MenuItem_Click"/>
+                    <MenuItem Name="m_miView_Zoom_300" Header="_300%" IsCheckable="True" Tag="300" Click="View_Zoom_MenuItem_Click"/>
+                    <MenuItem Name="m_miView_Zoom_400" Header="_400%" IsCheckable="True" Tag="400" Click="View_Zoom_MenuItem_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepView_Separator05"/>
+                <MenuItem Name="m_miView_RightToLeftLayout" Header="{x:Static prop:Resources.Item_View_RightToLeftLayout_Text}" IsCheckable="True" Click="View_RightToLeftLayout_Click"/>
+            </MenuItem>
+            <!-- 'Insert' Items -->
+            <MenuItem Name="m_miInsert" Header="{x:Static prop:Resources.Item_Insert_Text}" SubmenuOpened="Insert_SubmenuOpened">
+                <MenuItem Name="m_miInsert_File" Header="{x:Static prop:Resources.Item_Insert_File_Text}" Click="Insert_File_Click"/>
+                <Separator Name="m_sepInsert_Separator01"/>
+                <MenuItem Name="m_miInsert_Image" Header="{x:Static prop:Resources.Item_Insert_Image_Text}" Click="Insert_Image_Click"/>
+                <MenuItem Name="m_miInsert_TextFrame" Header="{x:Static prop:Resources.Item_Insert_TextFrame_Text}" Click="Insert_TextFrame_Click"/>
+                <MenuItem Name="m_miInsert_Shape" Header="{x:Static prop:Resources.Item_Insert_Shape_Text}">
+                    <MenuItem Name="m_miInsert_Shape_Lines" Header="{x:Static prop:Resources.Item_Insert_Shape_Lines_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_Rectangles" Header="{x:Static prop:Resources.Item_Insert_Shape_Rectangles_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_BasicShapes" Header="{x:Static prop:Resources.Item_Insert_Shape_BasicShapes_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_BlockArrows" Header="{x:Static prop:Resources.Item_Insert_Shape_BlockArrows_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_EquationShapes" Header="{x:Static prop:Resources.Item_Insert_Shape_EquationShapes_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_Flowchart" Header="{x:Static prop:Resources.Item_Insert_Shape_Flowchart_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_StarsAndBanners" Header="{x:Static prop:Resources.Item_Insert_Shape_StarsAndBanners_Text}"/>
+                    <MenuItem Name="m_miInsert_Shape_Callouts" Header="{x:Static prop:Resources.Item_Insert_Shape_Callouts_Text}"/>
+                    <Separator Name="m_sepInsert_Shape_Separator01"/>
+                    <MenuItem Name="m_miInsert_Shape_DrawingCanvas" Header="{x:Static prop:Resources.Item_Insert_Shape_DrawingCanvas_Text}" Click="Insert_Shape_DrawingCanvas_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miInsert_Barcode" Header="{x:Static prop:Resources.Item_Insert_Barcode_Text}"/>
+                <Separator Name="m_sepInsert_Separator02"/>
+                <MenuItem Name="m_miInsert_Header" Header="{x:Static prop:Resources.Item_Insert_Header_Text}">
+                    <MenuItem Name="m_miInsert_Header_Insert" Header="{x:Static prop:Resources.Item_Insert_Header_Insert_Text}" Click="Insert_Header_Insert_Click"/>
+                    <MenuItem Name="m_miInsert_Header_Remove" Header="{x:Static prop:Resources.Item_Insert_Header_Remove_Text}" Click="Insert_Header_Remove_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miInsert_Footer" Header="F_ooter">
+                    <MenuItem Name="m_miInsert_Footer_Insert" Header="{x:Static prop:Resources.Item_Insert_Footer_Text}" Click="Insert_Footer_Insert_Click"/>
+                    <MenuItem Name="m_miInsert_Footer_Remove" Header="{x:Static prop:Resources.Item_Insert_Footer_Insert_Text}" Click="Insert_Footer_Remove_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miInsert_PageNumber" Header="{x:Static prop:Resources.Item_Insert_PageNumber_Text}">
+                    <MenuItem Name="m_miInsert_PageNumber_Insert" Header="{x:Static prop:Resources.Item_Insert_PageNumber_Insert_Text}" Click="Insert_PageNumber_Insert_Click"/>
+                    <MenuItem Name="m_miInsert_PageNumber_Delete" Header="{x:Static prop:Resources.Item_Insert_PageNumber_Delete_Text}" Click="Insert_PageNumber_Remove_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepInsert_Separator03"/>
+                <MenuItem Name="m_miInsert_FormField" Header="{x:Static prop:Resources.Item_Insert_FormField_Text}">
+                    <MenuItem Name="m_miInsert_FormField_TextFormField" Header="{x:Static prop:Resources.Item_Insert_FormField_TextFormField_Text}" Click="Insert_FormFields_TextFormField_Click"/>
+                    <MenuItem Name="m_miInsert_FormField_CheckBox" Header="{x:Static prop:Resources.Item_Insert_FormField_CheckBox_Text}" Click="Insert_FormFields_CheckBox_Click"/>
+                    <MenuItem Name="m_miInsert_FormField_ComboBox" Header="{x:Static prop:Resources.Item_Insert_FormField_ComboBox_Text}" Click="Insert_FormFields_ComboBox_Click"/>
+                    <MenuItem Name="m_miInsert_FormField_DropDownList" Header="{x:Static prop:Resources.Item_Insert_FormField_DropDownList_Text}" Click="Insert_FormFields_DropDownList_Click"/>
+                    <MenuItem Name="m_miInsert_FormField_DateFormField" Header="{x:Static prop:Resources.Item_Insert_FormField_DateFormField_Text}" Click="Insert_FormFields_DateFormField_Click"/>
+                    <Separator Name="m_sepInsert_FormField_Separator01"/>
+                    <MenuItem Name="m_miInsert_FormField_Delete" Header="{x:Static prop:Resources.Item_Insert_FormField_Delete_Text}" Click="Insert_FormFields_Delete_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepInsert_Separator04"/>
+                <MenuItem Name="m_miInsert_Symbol" Header="{x:Static prop:Resources.Item_Insert_Symbol_Text}" Click="Insert_Symbol_Click"/>
+                <Separator Name="m_sepInsert_Separator05"/>
+                <MenuItem Name="m_miInsert_Hyperlink" Header="{x:Static prop:Resources.Item_Insert_Hyperlink_Text}" Click="Insert_Hyperlink_Click"/>
+                <MenuItem Name="m_miInsert_Bookmark" Header="{x:Static prop:Resources.Item_Insert_Bookmark_Text}">
+                    <MenuItem Name="m_miInsert_Bookmark_Insert" Header="{x:Static prop:Resources.Item_Insert_Bookmark_Insert_Text}" Click="Insert_Bookmark_Insert_Click"/>
+                    <MenuItem Name="m_miInsert_Bookmark_Delete" Header="{x:Static prop:Resources.Item_Insert_Bookmark_Delete_Text}" Click="Insert_Bookmark_Delete_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miInsert_TableOfContents" Header="{x:Static prop:Resources.Item_Insert_TableOfContents_Text}">
+                    <MenuItem Name="m_miInsert_TableOfContents_Insert" Header="{x:Static prop:Resources.Item_Insert_TableOfContents_Insert_Text}" Click="Insert_TableOfContents_Insert_Click"/>
+                    <MenuItem Name="m_miInsert_TableOfContents_Delete" Header="{x:Static prop:Resources.Item_Insert_TableOfContents_Delete_Text}" Click="Insert_TableOfContents_Delete_Click"/>
+                    <MenuItem Name="m_miInsert_TableOfContents_Update" Header="{x:Static prop:Resources.Item_Insert_TableOfContents_Update_Text}" Click="Insert_TableOfContents_Update_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepInsert_Separator06"/>
+                <MenuItem Name="m_miInsert_Columns" Header="{x:Static prop:Resources.Item_Insert_Columns_Text}" SubmenuOpened="Insert_Columns_SubmenuOpened">
+                    <MenuItem Name="m_miInsert_Columns_One" Header="{x:Static prop:Resources.Item_Insert_Columns_One_Text}" Click="Insert_Columns_One_Click"/>
+                    <MenuItem Name="m_miInsert_Columns_Two" Header="{x:Static prop:Resources.Item_Insert_Columns_Two_Text}" Click="Insert_Columns_Two_Click"/>
+                    <Separator Name="m_sepInsert_Columns_Separator01"/>
+                    <MenuItem Name="m_miInsert_Columns_MoreColumns" Header="{x:Static prop:Resources.Item_Insert_Columns_MoreColumns_Text}" Click="Insert_Columns_MoreColumns_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miInsert_PageBreaks" Header="{x:Static prop:Resources.Item_Insert_PageBreaks_Text}">
+                    <MenuItem Name="m_miInsert_PageBreaks_Page" Header="{x:Static prop:Resources.Item_Insert_PageBreaks_Page_Text}" Click="Insert_PageBreaks_Page_Click"/>
+                    <MenuItem Name="m_miInsert_PageBreaks_Column" Header="{x:Static prop:Resources.Item_Insert_PageBreaks_Column_Text}" Click="Insert_PageBreaks_Column_Click"/>
+                    <MenuItem Name="m_miInsert_PageBreaks_TextWrapping" Header="{x:Static prop:Resources.Item_Insert_PageBreaks_TextWrapping_Text}" Click="Insert_PageBreaks_TextWrapping_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miInsert_SectionBreaks" Header="{x:Static prop:Resources.Item_Insert_SectionBreaks_Text}">
+                    <MenuItem Name="m_miInsert_SectionBreaks_NextPage" Header="{x:Static prop:Resources.Item_Insert_SectionBreaks_NextPage_Text}" Click="Insert_SectionBreaks_NextPage_Click"/>
+                    <MenuItem Name="m_miInsert_SectionBreaks_Continuous" Header="{x:Static prop:Resources.Item_Insert_SectionBreaks_Continuous_Text}" Click="Insert_SectionBreaks_Continuous_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <!-- 'Format' Items -->
+            <MenuItem Name="m_miFormat" Header="{x:Static prop:Resources.Item_Format_Text}" SubmenuOpened="Format_SubmenuOpened">
+                <MenuItem Name="m_miFormat_Character" Header="{x:Static prop:Resources.Item_Format_Character_Text}" Click="Format_Character_Click"/>
+                <MenuItem Name="m_miFormat_Paragraph" Header="{x:Static prop:Resources.Item_Format_Paragraph_Text}" Click="Format_Paragraph_Click"/>
+                <MenuItem Name="m_miFormat_Styles" Header="{x:Static prop:Resources.Item_Format_Styles_Text}" Click="Format_Styles_Click"/>
+                <MenuItem Name="m_miFormat_ParagraphStructureLevels" Header="{x:Static prop:Resources.Item_Format_ParagraphStructureLevels_Text}" SubmenuOpened="Format_ParagraphStructureLevels_SubmenuOpened">
+                    <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle" Header="_Paragraph Style: [Current Paragraph Style]" SubmenuOpened="Format_ParagraphStructureLevels_CurrentParagraphStyle_SubmenuOpened">
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_BodyText" Header="{x:Static prop:Resources.Item_Format_ParagraphStructureLevels_CurrentParagraphStyle_BodyText_Text}" Tag="0" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level01" Header="Level _1" Tag="1" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level02" Header="Level _2" Tag="2" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level03" Header="Level _3" Tag="3" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level04" Header="Level _4" Tag="4" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level05" Header="Level _5" Tag="5" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level06" Header="Level _6" Tag="6" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level07" Header="Level _7" Tag="7" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level08" Header="Level _8" Tag="8" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level09" Header="Level _9" Tag="9" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_CurrentParagraphStyle_Level10" Header="Level 1_0" Tag="10" Click="Format_ParagraphStructureLevels_CurrentParagraphStyle_Level_Click"/>
+                    </MenuItem>
+                    <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph" Header="{x:Static prop:Resources.Item_Format_ParagraphStructureLevels_AddToParagraph_Text}" SubmenuOpened="Format_ParagraphStructureLevels_AddToParagraph_SubmenuOpened">
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_BodyText" Header="{x:Static prop:Resources.Item_Format_ParagraphStructureLevels_AddToParagraph_BodyText_Text}" Tag="0" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level01" Header="Level _1" Tag="1" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level02" Header="Level _2" Tag="2" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level03" Header="Level _3" Tag="3" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level04" Header="Level _4" Tag="4" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level05" Header="Level _5" Tag="5" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level06" Header="Level _6" Tag="6" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level07" Header="Level _7" Tag="7" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level08" Header="Level _8" Tag="8" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level09" Header="Level _9" Tag="9" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                        <MenuItem Name="m_miFormat_ParagraphStructureLevels_AddToParagraph_Level10" Header="Level 1_0" Tag="10" Click="Format_ParagraphStructureLevels_AddToParagraph_Level_Click"/>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Name="m_miFormat_BulletsAndNumbering" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_Text}" SubmenuOpened="Format_BulletsAndNumbering_SubmenuOpened">
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_ArabicNumbers" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_ArabicNumbers_Text}" IsCheckable="True" Click="Format_BulletsAndNumbering_ArabicNumbers_Click"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_CapitalLetters" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_CapitalLetters_Text}" IsCheckable="True" Click="Format_BulletsAndNumbering_Letters_Click"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_Letters" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_Letters_Text}" IsCheckable="True" Click="Format_BulletsAndNumbering_CapitalLetters_Click"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_RomanNumbers" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_RomanNumbers_Text}" IsCheckable="True" Click="Format_BulletsAndNumbering_RomanNumbers_Click"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_SmallRomanNumbers" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_SmallRomanNumbers_Text}" IsCheckable="True" Click="Format_BulletsAndNumbering_SmallRomanNumbers_Click"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_AsStructuredList" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_AsStructuredList_Text}" Click="Format_BulletsAndNumbering_AsStructuredList_Click"/>
+                    <Separator Name="m_sepFormat_BulletsAndNumbering_Separator01"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_Bullets" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_Bullets_Text}" IsCheckable="True" Click="Format_BulletsAndNumbering_Bullets_Click"/>
+                    <Separator Name="m_sepFormat_BulletsAndNumbering_Separator02"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_IncreaseLevel" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_IncreaseLevel_Text}" Click="Format_BulletsAndNumbering_IncreaseLevel_Click"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_DecreaseLevel" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_DecreaseLevel_Text}" Click="Format_BulletsAndNumbering_DecreaseLevel_Click"/>
+                    <Separator Name="m_sepFormat_BulletsAndNumbering_Separator03"/>
+                    <MenuItem Name="m_miFormat_BulletsAndNumbering_Properties" Header="{x:Static prop:Resources.Item_Format_BulletsAndNumbering_Properties_Text}" Click="Format_BulletsAndNumbering_Properties_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepFormat_Separator01"/>
+                <MenuItem Name="m_miFormat_Image" Header="{x:Static prop:Resources.Item_Format_Image_Text}" Click="Format_Image_Click"/>
+                <MenuItem Name="m_miFormat_TextFrame" Header="{x:Static prop:Resources.Item_Format_TextFrame_Text}" Click="Format_TextFrame_Click"/>
+                <MenuItem Name="m_miFormat_Shape" Header="{x:Static prop:Resources.Item_Format_Shape_Text}" Click="Format_Shape_Click"/>
+                <MenuItem Name="m_miFormat_Barcode" Header="{x:Static prop:Resources.Item_Format_Barcode_Text}" Click="Frame_Barcode_Click"/>
+                <Separator Name="m_sepFormat_Separator02"/>
+                <MenuItem Name="m_miFormat_HeadersAndFooters" Header="{x:Static prop:Resources.Item_Format_HeadersAndFooters_Text}" Click="Frame_HeadersAndFooters_Click"/>
+                <MenuItem Name="m_miFormat_PageNumberField" Header="{x:Static prop:Resources.Item_Format_PageNumberField_Text}" Click="Format_PageNumberField_Click"/>
+                <Separator Name="m_sepFormat_Separator03"/>
+                <MenuItem Name="m_miFormat_FormFields" Header="{x:Static prop:Resources.Item_Format_FormFields_Text}" SubmenuOpened="Format_FormFields_SubmenuOpened">
+                    <MenuItem Name="m_miFormat_FormFields_Edit" Header="{x:Static prop:Resources.Item_Format_FormFields_Edit_Text}" Click="Format_FormFields_Edit_Click"/>
+                    <MenuItem Name="m_miFormat_FormFields_EnableFormValidation" Header="{x:Static prop:Resources.Item_Format_FormFields_EnableFormValidation_Text}" IsCheckable="True" Click="Format_FormFields_EnableFormValidation_Click"/>
+                    <MenuItem Name="m_miFormat_FormFields_ManageConditionalInstructions" Header="{x:Static prop:Resources.Item_Format_FormFields_ManageConditionalInstructions_Text}" Click="Format_FormFields_ManageConditionalInstructions_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepFormat_Separator04"/>
+                <MenuItem Name="m_miFormat_Hyperlink" Header="{x:Static prop:Resources.Item_Format_Hyperlink_Text}" Click="Format_Hyperlink_Click"/>
+                <MenuItem Name="m_miFormat_Bookmark" Header="{x:Static prop:Resources.Item_Format_Bookmark_Text}" Click="Format_Bookmark_Click"/>
+                <MenuItem Name="m_miFormat_TableOfContents" Header="{x:Static prop:Resources.Item_Format_TableOfContents_Text}"/>
+                <Separator Name="m_sepFormat_Separator05"/>
+                <MenuItem Name="m_miFormat_Columns" Header="{x:Static prop:Resources.Item_Format_Columns_Text}" Click="Format_Columns_Click"/>
+                <MenuItem Name="m_miFormat_PageBorders" Header="{x:Static prop:Resources.Item_Format_PageBorders_Text}" Click="Format_PageBorders_Click"/>
+                <MenuItem Name="m_miFormat_PageColor" Header="{x:Static prop:Resources.Item_Format_PageColor_Text}" Click="Format_PageColor_Click"/>
+                <MenuItem Name="m_miFormat_Tabs" Header="{x:Static prop:Resources.Item_Format_Tabs_Text}" Click="Format_Tabs_Click"/>
+                <Separator Name="m_sepFormat_Separator06"/>
+                <MenuItem Name="m_miFormat_Language" Header="{x:Static prop:Resources.Item_Format_Language_Text}" Click="Format_Language_Click"/>
+            </MenuItem>
+            <!-- 'Table' Items -->
+            <MenuItem Name="m_miTable" Header="{x:Static prop:Resources.Item_Table_Text}" SubmenuOpened="Table_SubmenuOpened">
+                <MenuItem Name="m_miTable_Insert" Header="{x:Static prop:Resources.Item_Table_Insert_Text}">
+                    <MenuItem Name="m_miTable_Insert_Table" Header="{x:Static prop:Resources.Item_Table_Insert_Table_Text}" Click="Table_Insert_Table_Click"/>
+                    <Separator Name="m_sepTable_Insert_Separator01"/>
+                    <MenuItem Name="m_miTable_Insert_ColumnToTheLeft" Header="{x:Static prop:Resources.Item_Table_Insert_ColumnToTheLeft_Text}" Click="Table_Insert_ColumnToTheLeft_Click"/>
+                    <MenuItem Name="m_miTable_Insert_ColumnToTheRight" Header="{x:Static prop:Resources.Item_Table_Insert_ColumnToTheRight_Text}" Click="Table_Insert_ColumnToTheRight_Click"/>
+                    <Separator Name="m_sepTable_Insert_Separator02"/>
+                    <MenuItem Name="m_miTable_Insert_RowAbove" Header="{x:Static prop:Resources.Item_Table_Insert_RowAbove_Text}" Click="Table_Insert_RowAbove_Click"/>
+                    <MenuItem Name="m_miTable_Insert_RowBelow" Header="{x:Static prop:Resources.Item_Table_Insert_RowBelow_Text}" Click="Table_Insert_RowBelow_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miTable_Delete" Header="{x:Static prop:Resources.Item_Table_Delete_Text}">
+                    <MenuItem Name="m_miTable_Delete_Cells" Header="{x:Static prop:Resources.Item_Table_Delete_Cells_Text}" Click="Table_Delete_Cells_Click"/>
+                    <MenuItem Name="m_miTable_Delete_Columns" Header="{x:Static prop:Resources.Item_Table_Delete_Columns_Text}" Click="Table_Delete_Columns_Click"/>
+                    <MenuItem Name="m_miTable_Delete_Rows" Header="{x:Static prop:Resources.Item_Table_Delete_Rows_Text}" Click="Table_Delete_Rows_Click"/>
+                    <MenuItem Name="m_miTable_Delete_Table" Header="{x:Static prop:Resources.Item_Table_Delete_Table_Text}" Click="Table_Delete_Table_Click"/>
+                </MenuItem>
+                <MenuItem Name="m_miTable_Select" Header="{x:Static prop:Resources.Item_Table_Select_Text}">
+                    <MenuItem Name="m_miTable_Select_Cell" Header="{x:Static prop:Resources.Item_Table_Select_Cell_Text}" Click="Table_Select_Cell_Click"/>
+                    <MenuItem Name="m_miTable_Select_Column" Header="{x:Static prop:Resources.Item_Table_Select_Column_Text}" Click="Table_Select_Column_Click"/>
+                    <MenuItem Name="m_miTable_Select_Row" Header="{x:Static prop:Resources.Item_Table_Select_Row_Text}" Click="Table_Select_Row_Click"/>
+                    <MenuItem Name="m_miTable_Select_Table" Header="{x:Static prop:Resources.Item_Table_Select_Table_Text}" Click="Table_Select_Table_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepTable_Separator01"/>
+                <MenuItem Name="m_miTable_MergeCells" Header="{x:Static prop:Resources.Item_Table_MergeCells_Text}" Click="Table_MergeCells_Click"/>
+                <MenuItem Name="m_miTable_SplitCells" Header="{x:Static prop:Resources.Item_Table_SplitCells_Text}" Click="Table_SplitCells_Click"/>
+                <MenuItem Name="m_miTable_SplitTable" Header="{x:Static prop:Resources.Item_Table_SplitTable_Text}">
+                    <MenuItem Name="m_miTable_SplitTable_Above" Header="{x:Static prop:Resources.Item_Table_SplitTable_Above_Text}" Click="Table_SplitTable_Above_Click"/>
+                    <MenuItem Name="m_miTable_SplitTable_Below" Header="{x:Static prop:Resources.Item_Table_SplitTable_Below_Text}" Click="Table_SplitTable_Below_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepTable_Separator02"/>
+                <MenuItem Name="m_miTable_Formulas" Header="{x:Static prop:Resources.Item_Table_Formulas_Text}" SubmenuOpened="Formulas_SubmenuOpened">
+                    <MenuItem Name="m_miTable_Formulas_A1ReferenceStyle" Header="{x:Static prop:Resources.Item_Table_Formulas_A1ReferenceStyle_Text}" Click="Table_Formulas_A1ReferenceStyle_Click"/>
+                    <MenuItem Name="m_miTable_Formulas_R1C1ReferenceStyle" Header="{x:Static prop:Resources.Item_Table_Formulas_R1C1ReferenceStyle_Text}" Click="Table_Formulas_R1C1ReferenceStyle_Click"/>
+                    <Separator Name="m_sepTable_Formulas_Separator01"/>
+                    <MenuItem Name="m_miTable_Formulas_EditFormula" Header="{x:Static prop:Resources.Item_Table_Formulas_EditFormula_Text}" Click="Table_Formulas_AutomaticCalculation_Click"/>
+                    <Separator Name="m_sepTable_Formulas_Separator02"/>
+                    <MenuItem Name="m_miTable_Formulas_AutomaticCalculation" Header="{x:Static prop:Resources.Item_Table_Formulas_AutomaticCalculation_Text}" Click="Table_Formulas_EditFormula_Click"/>
+                </MenuItem>
+                <Separator Name="m_sepTable_Separator03"/>
+                <MenuItem Name="m_miTable_Properties" Header="{x:Static prop:Resources.Item_Table_Properties_Text}" Click="Table_Properties_Click"/>
+            </MenuItem>
+        </Menu>
+        <WPF:StatusBar x:Name="m_sbStatusBar" ShowZoom="False" BorderStyle="VerticalColorScheme" DockPanel.Dock="Bottom"/>
+        <WPF:ButtonBar x:Name="m_bbButtonBar" DockPanel.Dock="Top"/>
+        <WPF:RulerBar x:Name="m_rbHorizontalRulerBar"/>
+        <WPF:RulerBar x:Name="m_rbVerticalRulerBar" HorizontalAlignment="Left" VerticalAlignment="Stretch" DockPanel.Dock="Left"/>
+        <WPF:TextControl DockPanel.Dock="Top" x:Name="m_txTextControl" AllowDrag="True" AllowDrop="True" HideSelection="False"
+            ButtonBar="m_bbButtonBar"
+            RulerBar="m_rbHorizontalRulerBar"
+            VerticalRulerBar="m_rbVerticalRulerBar"
+            StatusBar="m_sbStatusBar"
+                        
+            Changed="TextControl_Changed"           
+            Loaded="TextControl_Loaded_MainWindow">
+            <WPF:TextControl.DisplayColors>
+                <WPF:TextControlColors DesktopColor="#F5F6F7" DarkShadowColor="#F5F6F7" LightShadowColor="#F5F6F7" />
+            </WPF:TextControl.DisplayColors>
+        </WPF:TextControl>
+    </DockPanel>
+</Window>

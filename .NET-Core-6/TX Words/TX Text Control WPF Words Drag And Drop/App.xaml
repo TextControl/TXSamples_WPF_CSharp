@@ -1,0 +1,9 @@
+﻿<Application x:Class="TX_Text_Control_WPF_Words_Drag_And_Drop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TX_Text_Control_WPF_Words_Drag_And_Drop"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

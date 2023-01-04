@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AA96167A-4E68-4CD5-8C77-EAFA46823F12}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TXTextControl.Words</RootNamespace>
+    <AssemblyName>TX Text Control WPF Words</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tx.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>tx.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TXBarcode, Version=31.0.700.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL" />
+    <Reference Include="TXBarcode.WPF, Version=31.0.700.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL" />
+    <Reference Include="TXDrawing, Version=31.0.700.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL" />
+    <Reference Include="TXDrawing.WPF, Version=31.0.700.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL" />
+    <Reference Include="TXTextControl, Version=31.0.2400.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL" />
+    <Reference Include="TXTextControl.WPF, Version=31.0.1600.500, Culture=neutral, PublicKeyToken=6b83fe9a75cfb638, processorArchitecture=MSIL" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Behavior\MainWindow_DragAndDrop.cs" />
+    <Compile Include="Behavior\MainWindow_OpenHyperlink.cs" />
+    <Compile Include="Behavior\MainWindow_Shortcuts.cs" />
+    <Compile Include="Supporting Classes and Dialogs\UserAccessDialog.xaml.cs" />
+    <Compile Include="Supporting Classes and Dialogs\UserInfo.cs" />
+    <Compile Include="Supporting Classes and Dialogs\PasswordDialog.xaml.cs" />
+    <Compile Include="Layout\MainWindow_Toolbars.cs" />
+    <Compile Include="Supporting Classes and Dialogs\ExceptionHandler.cs" />
+    <Page Include="Supporting Classes and Dialogs\UserAccessDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Supporting Classes and Dialogs\PasswordDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Layout\1. File Menu Item\MainWindow_FileMenuItem.cs" />
+    <Compile Include="Layout\1. File Menu Item\MainWindow_FileMenuItem_Click.cs" />
+    <Compile Include="Layout\1. File Menu Item\MainWindow_FileMenuItem_DropDownOpening.cs" />
+    <Compile Include="Layout\1. File Menu Item\MainWindow_FileMenuItem_Methods.cs" />
+    <Compile Include="Layout\2. Edit Menu Item\MainWindow_EditMenuItem.cs" />
+    <Compile Include="Layout\2. Edit Menu Item\MainWindow_EditMenuItem_Click.cs" />
+    <Compile Include="Layout\2. Edit Menu Item\MainWindow_EditMenuItem_DropDownOpening.cs" />
+    <Compile Include="Layout\2. Edit Menu Item\MainWindow_EditMenuItem_Methods.cs" />
+    <Compile Include="Layout\3. View Menu Item\MainWindow_ViewMenuItem.cs" />
+    <Compile Include="Layout\3. View Menu Item\MainWindow_ViewMenuItem_Click.cs" />
+    <Compile Include="Layout\3. View Menu Item\MainWindow_ViewMenuItem_DropDownOpening.cs" />
+    <Compile Include="Layout\3. View Menu Item\MainWindow_ViewMenuItem_Methods.cs" />
+    <Compile Include="Layout\4. Insert Menu Item\MainWindow_InsertMenuItem.cs" />
+    <Compile Include="Layout\4. Insert Menu Item\MainWindow_InsertMenuItem_Click.cs" />
+    <Compile Include="Layout\4. Insert Menu Item\MainWindow_InsertMenuItem_DropDownOpening.cs" />
+    <Compile Include="Layout\4. Insert Menu Item\MainWindow_InsertMenuItem_Methods.cs" />
+    <Compile Include="Layout\5. Format Menu Item\MainWindow_FormatMenuItem.cs" />
+    <Compile Include="Layout\5. Format Menu Item\MainWindow_FormatMenuItem_Click.cs" />
+    <Compile Include="Layout\5. Format Menu Item\MainWindow_FormatMenuItem_DropDownOpening.cs" />
+    <Compile Include="Layout\5. Format Menu Item\MainWindow_FormatMenuItem_Methods.cs" />
+    <Compile Include="Layout\6. Table Menu Item\MainWindow_TableMenuItem.cs" />
+    <Compile Include="Layout\6. Table Menu Item\MainWindow_TableMenuItem_Click.cs" />
+    <Compile Include="Layout\6. Table Menu Item\MainWindow_TableMenuItem_DropDownOpening.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tx.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Images\RightToLeft_Small.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
