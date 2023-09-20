@@ -8,6 +8,7 @@
 ** copyright:		© Text Control GmbH
 **-----------------------------------------------------------------------------------------------------------*/
 using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace Step3 {
